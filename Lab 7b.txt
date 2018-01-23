@@ -1,0 +1,383 @@
+SQL> create table employee (e_name varchar2(10), street varchar2(10), city varchar2(10));
+
+Table created.
+
+SQL> create table works (e_name varchar2(10), c_name varchar2(10), salary);
+create table works (e_name varchar2(10), c_name varchar2(10), salary)
+                                                              *
+ERROR at line 1:
+ORA-02263: need to specify the datatype for this column
+
+
+SQL> create table works (e_name varchar2(10), c_name varchar2(10), salary number);
+
+Table created.
+
+SQL> create table company (c_name varchar2(10), city varchar2(10));
+
+Table created.
+
+SQL> insert into employee values('&e_name', '&street', '&city');
+Enter value for e_name: raja
+Enter value for street: 123
+Enter value for city: chennai
+old   1: insert into employee values('&e_name', '&street', '&city')
+new   1: insert into employee values('raja', '123', 'chennai')
+
+1 row created.
+
+SQL> /
+Enter value for e_name: raj
+Enter value for street: 134
+Enter value for city: chennai
+old   1: insert into employee values('&e_name', '&street', '&city')
+new   1: insert into employee values('raj', '134', 'chennai')
+
+1 row created.
+
+SQL> /
+Enter value for e_name: ramu
+Enter value for street: 134
+Enter value for city: chennai
+old   1: insert into employee values('&e_name', '&street', '&city')
+new   1: insert into employee values('ramu', '134', 'chennai')
+
+1 row created.
+
+SQL> /
+Enter value for e_name: taj
+Enter value for street: 654
+Enter value for city: banglore
+old   1: insert into employee values('&e_name', '&street', '&city')
+new   1: insert into employee values('taj', '654', 'banglore')
+
+1 row created.
+
+SQL> /
+Enter value for e_name: yash
+Enter value for street: 321
+Enter value for city: banglore
+old   1: insert into employee values('&e_name', '&street', '&city')
+new   1: insert into employee values('yash', '321', 'banglore')
+
+1 row created.
+
+SQL> /
+Enter value for e_name: mohit
+Enter value for street: 543
+Enter value for city: mumbai
+old   1: insert into employee values('&e_name', '&street', '&city')
+new   1: insert into employee values('mohit', '543', 'mumbai')
+
+1 row created.
+
+SQL> /
+Enter value for e_name: modi
+Enter value for street: 541
+Enter value for city: ranchi
+old   1: insert into employee values('&e_name', '&street', '&city')
+new   1: insert into employee values('modi', '541', 'ranchi')
+
+1 row created.
+
+SQL> /
+Enter value for e_name: akshay
+Enter value for street: 123
+Enter value for city: delhi
+old   1: insert into employee values('&e_name', '&street', '&city')
+new   1: insert into employee values('akshay', '123', 'delhi')
+
+1 row created.
+
+SQL> /
+Enter value for e_name: rakesh
+Enter value for street: 123
+Enter value for city: delhi
+old   1: insert into employee values('&e_name', '&street', '&city')
+new   1: insert into employee values('rakesh', '123', 'delhi')
+
+1 row created.
+
+SQL> select * from employee;
+
+E_NAME     STREET     CITY
+---------- ---------- ----------
+raja       123        chennai
+raj        134        chennai
+ramu       134        chennai
+taj        654        banglore
+yash       321        banglore
+mohit      543        mumbai
+modi       541        ranchi
+akshay     123        delhi
+rakesh     123        delhi
+
+9 rows selected.
+SQL> insert into works values ('&e_name', '&c_name', &salary);
+Enter value for e_name: modi
+Enter value for c_name: abc
+Enter value for salary: 12345
+old   1: insert into works values ('&e_name', '&c_name', &salary)
+new   1: insert into works values ('modi', 'abc', 12345)
+
+1 row created.
+
+SQL> /
+Enter value for e_name: rakesh
+Enter value for c_name: abc
+Enter value for salary: 12345
+old   1: insert into works values ('&e_name', '&c_name', &salary)
+new   1: insert into works values ('rakesh', 'abc', 12345)
+
+1 row created.
+
+SQL> /
+Enter value for e_name: akshay
+Enter value for c_name: pqr
+Enter value for salary: 23456
+old   1: insert into works values ('&e_name', '&c_name', &salary)
+new   1: insert into works values ('akshay', 'pqr', 23456)
+
+1 row created.
+
+SQL> /
+Enter value for e_name: mohit
+Enter value for c_name: xyz
+Enter value for salary: 23456
+old   1: insert into works values ('&e_name', '&c_name', &salary)
+new   1: insert into works values ('mohit', 'xyz', 23456)
+
+1 row created.
+
+SQL> /
+Enter value for e_name: raja
+Enter value for c_name: abc
+Enter value for salary: 23415
+old   1: insert into works values ('&e_name', '&c_name', &salary)
+new   1: insert into works values ('raja', 'abc', 23415)
+
+1 row created.
+
+SQL> /
+Enter value for e_name: yash
+Enter value for c_name: pqr
+Enter value for salary: 23456
+old   1: insert into works values ('&e_name', '&c_name', &salary)
+new   1: insert into works values ('yash', 'pqr', 23456)
+
+1 row created.
+
+SQL> /
+Enter value for e_name: taj
+Enter value for c_name: xyz
+Enter value for salary: 32451
+old   1: insert into works values ('&e_name', '&c_name', &salary)
+new   1: insert into works values ('taj', 'xyz', 32451)
+
+1 row created.
+
+SQL> /
+Enter value for e_name: ramu
+Enter value for c_name: pqr
+Enter value for salary: 34253
+old   1: insert into works values ('&e_name', '&c_name', &salary)
+new   1: insert into works values ('ramu', 'pqr', 34253)
+
+1 row created.
+
+SQL> /
+Enter value for e_name: raj
+Enter value for c_name: xyz
+Enter value for salary: 12423
+old   1: insert into works values ('&e_name', '&c_name', &salary)
+new   1: insert into works values ('raj', 'xyz', 12423)
+
+1 row created.
+
+SQL> select * from works;
+
+E_NAME     C_NAME         SALARY
+---------- ---------- ----------
+modi       abc             12345
+rakesh     abc             12345
+akshay     pqr             23456
+mohit      xyz             23456
+raja       abc             23415
+yash       pqr             23456
+taj        xyz             32451
+ramu       pqr             34253
+raj        xyz             12423
+
+9 rows selected.
+SQL> insert into company values ('&c_name', '&city');
+Enter value for c_name: abc
+Enter value for city: mumbai
+old   1: insert into company values ('&c_name', '&city')
+new   1: insert into company values ('abc', 'mumbai')
+
+1 row created.
+
+SQL> /
+Enter value for c_name: pqr
+Enter value for city: banglore
+old   1: insert into company values ('&c_name', '&city')
+new   1: insert into company values ('pqr', 'banglore')
+
+1 row created.
+
+SQL> /
+Enter value for c_name: xyz
+Enter value for city: chennai
+old   1: insert into company values ('&c_name', '&city')
+new   1: insert into company values ('xyz', 'chennai')
+
+1 row created.
+
+SQL> select * from company;
+
+C_NAME     CITY
+---------- ----------
+abc        mumbai
+pqr        banglore
+xyz        chennai
+SQL> select e_name from works where c_name='abc';
+
+E_NAME
+----------
+modi
+rakesh
+raja
+
+SQL> select e_name, city from employee where e_name in (select e_name from works where c_name='abc')
+;
+
+E_NAME     CITY
+---------- ----------
+modi       ranchi
+rakesh     delhi
+raja       chennai
+
+SQL> select * from employee where e_name in (select e_name from works where salary>12345 and c_name=
+'abc');
+
+E_NAME     STREET     CITY
+---------- ---------- ----------
+raja       123        chennai
+
+SQL> select e_name from employee E, works W, company C where E.city=C.city and W.c_name=c.c_name
+select e_name from employee E, works W, company C where E.city=C.city and W.c_name=c.c_name
+       *
+ERROR at line 1:
+ORA-00918: column ambiguously defined
+
+SQL> alter table employee rename column e_name to name;
+
+Table altered.
+
+SQL> select name from employee E, works W, company C where E.city=C.city and W.c_name=c.c_name;
+
+NAME
+----------
+mohit
+mohit
+yash
+taj
+ramu
+raj
+raja
+mohit
+yash
+taj
+ramu
+
+NAME
+----------
+raj
+raja
+yash
+taj
+ramu
+raj
+raja
+
+18 rows selected.
+
+or
+
+SQL> select name from employee natural join company natura
+
+NAME
+----------
+raja
+raja
+raja
+raja
+raja
+raja
+raja
+raja
+raja
+raj
+raj
+
+NAME
+----------
+raj
+raj
+raj
+raj
+raj
+raj
+raj
+ramu
+ramu
+ramu
+ramu
+
+NAME
+----------
+ramu
+ramu
+ramu
+ramu
+ramu
+taj
+taj
+taj
+taj
+taj
+taj
+
+NAME
+----------
+taj
+taj
+taj
+yash
+yash
+yash
+yash
+yash
+yash
+yash
+yash
+
+NAME
+----------
+yash
+mohit
+mohit
+mohit
+mohit
+mohit
+mohit
+mohit
+mohit
+mohit
+
+54 rows selected.
+
+SQL> 
+
+
+

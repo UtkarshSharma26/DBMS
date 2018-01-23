@@ -1,0 +1,59 @@
+Prime
+--------------------------
+
+
+SQL> set serveroutput  on
+SQL> declare
+  2  num int;
+  3  r int;
+  4  flag int;
+  5  
+  6  begin
+  7  num:='&num';
+  8  for i in 2..num-1
+  9  loop
+ 10  r:=mod(num,i);
+ 11  if (r=0) 
+ 12  then 
+ 13   flag:=1;
+ 14  end if;
+ 15   end loop;
+ 16  if(flag=1) then 
+ 17  dbms_output.put_line('The number is not prime')
+ 18  else 
+ 19  dbms_output.put_line('The number is prime');
+ 20  end if;
+ 21  end;
+ 22  /
+Enter value for num: 2
+old   7: num:='&num';
+new   7: num:='2';
+The number is prime
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for num: 4
+old   7: num:='&num';
+new   7: num:='4';
+The number is not prime
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for num: 87
+old   7: num:='&num';
+new   7: num:='87';
+The number is not prime
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for num: 19
+old   7: num:='&num';
+new   7: num:='19';
+The number is prime
+
+PL/SQL procedure successfully completed.
+
+SQL> 

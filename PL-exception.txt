@@ -1,0 +1,38 @@
+
+SQL> set serveroutput on;
+SQL> declare
+  2  incorrect_id exception;
+  3  cursor a is select emp_id from emp;
+  4  a_var emp.emp_id%type;
+  5  nme varchar2(10);
+  6  n number(3);
+  7  begin
+  8  select '&emp_name',&emp_id into nme,n from dual;
+  9  open a;
+ 10  fetch a into a_var;
+ 11  while a%found 
+ 12  loop
+ 13  if a_var=n then
+ 14  raise incorrect_id;
+ 15  end if;
+ 16  fetch a into a_var;
+ 17  end loop;
+ 18  insert into emp (emp_name,emp_id) values (nme,n);
+ 19  exception
+ 20  when incorrect_id then
+ 21  dbms_output.put_line('emp_id already exists');
+ 22  end;
+ 23  
+ 24  ------------------------------------------/
+ 25  rajesh
+ 26  2
+ 27  /
+Enter value for emp_name: rajesh
+Enter value for emp_id: 2
+old   8: select '&emp_name',&emp_id into nme,n from dual;
+new   8: select 'rajesh',2 into nme,n from dual;
+rajesh
+*
+ERROR at line 25:
+ORA-06550: line 25, column 1:
+PLS-00103: Encountered the symbol "RAJESH"

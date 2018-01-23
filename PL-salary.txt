@@ -1,0 +1,28 @@
+
+Salary
+------------------------------------------------
+SQL> set serveroutput on;
+SQL> declare
+  2           cursor empdet is select * from emp where salary>3000000;
+  3           c_var emp%rowtype;
+  4           i number(2);
+  5     begin
+  6     if not empdet%isopen then
+  7     open empdet;
+  8     end if;
+  9     fetch empdet into c_var;
+ 10     while empdet%found
+ 11     loop
+ 12  dbms_output.put_line('The employee having salary more than 3000000 are:  '|| c_var.emp_name || ',' ||  c_var.emp_id );
+ 13     fetch empdet into c_var;
+ 14     end loop;
+ 15     close empdet;
+ 16     end;
+ 17     
+ 18  /
+The employee having salary more than 3000000 are:  raj,7
+The employee having salary more than 3000000 are:  atin,6
+The employee having salary more than 3000000 are:  rajesh,2
+The employee having salary more than 3000000 are:  geeta,3
+
+PL/SQL procedure successfully completed.

@@ -1,0 +1,23 @@
+
+SQL> create or replace trigger tg2 before insert on phno
+  2  for each row
+  3  begin
+  4  if(new.ph is null) then
+  5  new ph:='NULL';
+  6  endif;
+  7  end;
+  8  /
+
+Warning: Trigger created with compilation errors.
+
+SQL> 
+SQL> select * from phno;
+
+NAME               PH
+---------- ----------
+ram            123456
+rahul      3.5657E+10
+rahul        45352535
+rakesh      567467435
+
+SQL> 

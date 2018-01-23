@@ -1,0 +1,28 @@
+Factorial
+---------------------------------------------
+
+SQL> set serveroutput on
+SQL> declare
+  2  n number(3);
+  3  fact number(5);
+  4  
+  5  begin
+  6  n:=&n;
+  7  if(n=0)then 
+  8  dbms_output.put_line('fact(0) is 1');
+  9  end if;
+ 10  fact:=1;
+ 11  for i in 1..n
+ 12  loop
+ 13  fact:=fact*i;
+ 14  end loop;
+ 15  dbms_output.put_line('fact(n) is '||fact);
+ 16  end;
+ 17  
+ 18  /
+Enter value for n: 5
+old   6: n:=&n;
+new   6: n:=5;
+fact(n) is 120
+
+PL/SQL procedure successfully completed.

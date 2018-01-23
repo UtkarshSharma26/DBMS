@@ -1,0 +1,1145 @@
+SQL> create table emp(id char(5),name varchar(10),salary number,dept varchar(5));
+
+Table created.
+
+SQL> insert into emp values('1','abc','10000','cse');
+
+1 row created.
+
+SQL> insert into emp (salary,id,dept,name)values('80000','2','eee','xyz');
+
+1 row created.
+
+SQL> insert into emp (salary,id,dept,name)values('8000','3','eee','xz');
+
+1 row created.
+
+SQL> insert into emp values('4','abcd','100000','cse');
+
+1 row created.
+
+SQL> insert into emp values('&id','&name');
+Enter value for id: 5
+Enter value for name: gfg
+old   1: insert into emp values('&id','&name')
+new   1: insert into emp values('5','gfg')
+insert into emp values('5','gfg')
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> select * from emp;
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse1
+abc
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+
+SQL> /
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+
+SQL> insert into emp values('&id','&name','&dept','&salary');
+Enter value for id: 6
+Enter value for name: red
+Enter value for dept: mech
+Enter value for salary: 23563
+old   1: insert into emp values('&id','&name','&dept','&salary')
+new   1: insert into emp values('6','red','mech','23563')
+insert into emp values('6','red','mech','23563')
+                                 *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+SQL> /
+Enter value for id: 5
+Enter value for name: re
+Enter value for dept: mech
+Enter value for salary: 4442
+old   1: insert into emp values('&id','&name','&dept','&salary')
+new   1: insert into emp values('5','re','mech','4442')
+insert into emp values('5','re','mech','4442')
+                                *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+SQL> alter table emp modify salary char[10];
+alter table emp modify salary char[10]
+                                  *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> 
+SQL> insert into emp values('&id','&name','&salary','&dept');
+Enter value for id: 5
+Enter value for name: d
+Enter value for salary: 3
+Enter value for dept: 56
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('5','d','3','56')
+
+1 row created.
+
+SQL> /
+Enter value for id: 7
+Enter value for name: fs
+Enter value for salary: 4463
+Enter value for dept: cse
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('7','fs','4463','cse')
+
+1 row created.
+
+SQL> /
+Enter value for id: 9
+Enter value for name: ers
+Enter value for salary: 13546
+Enter value for dept: it
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('9','ers','13546','it')
+
+1 row created.
+
+SQL> 
+SQL> /
+Enter value for id: 10
+Enter value for name: dcx
+Enter value for salary: 53687
+Enter value for dept: mech
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('10','dcx','53687','mech')
+
+1 row created.
+
+SQL> /
+Enter value for id: 11
+Enter value for name: dfw
+Enter value for salary: 66756
+Enter value for dept: eee
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('11','dfw','66756','eee')
+
+1 row created.
+
+SQL> /
+Enter value for id: 12
+Enter value for name: eaf
+Enter value for salary: 67784
+Enter value for dept: ece
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('12','eaf','67784','ece')
+
+1 row created.
+
+SQL> select * from emp;
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+5     d                   3 56
+7     fs               4463 cse
+9     ers             13546 it
+10    dcx             53687 mech
+11    dfw             66756 eee
+12    eaf             67784 ece
+
+10 rows selected.
+
+SQL> delete from emp where(name='d');
+
+1 row deleted.
+
+SQL> select * from emp;
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+7     fs               4463 cse
+9     ers             13546 it
+10    dcx             53687 mech
+11    dfw             66756 eee
+12    eaf             67784 ece
+
+9 rows selected.
+
+SQL> insert into emp values('&id','&name','&salary','&dept');
+Enter value for id: 5
+Enter value for name: ghj
+Enter value for salary: 74523
+Enter value for dept: it
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('5','ghj','74523','it')
+
+1 row created.
+
+SQL> /
+Enter value for id: 6
+Enter value for name: ged
+Enter value for salary: 7425
+Enter value for dept: mech
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('6','ged','7425','mech')
+
+1 row created.
+
+SQL> /
+Enter value for id: 8
+Enter value for name: df
+Enter value for salary: 6746
+Enter value for dept: ece
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('8','df','6746','ece')
+
+1 row created.
+
+SQL> /
+Enter value for id: 13
+Enter value for name: eef
+Enter value for salary: 56735
+Enter value for dept: it
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('13','eef','56735','it')
+
+1 row created.
+
+SQL> /
+Enter value for id: 14
+Enter value for name: mdi
+Enter value for salary: 9835
+Enter value for dept: mech
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('14','mdi','9835','mech')
+
+1 row created.
+
+SQL> select *from emp;
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+7     fs               4463 cse
+9     ers             13546 it
+10    dcx             53687 mech
+11    dfw             66756 eee
+12    eaf             67784 ece
+5     ghj             74523 it
+6     ged              7425 mech
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+8     df               6746 ece
+13    eef             56735 it
+14    mdi              9835 mech
+
+14 rows selected.
+
+SQL> SQL> create table emp(id char(5),name varchar(10),salary number,dept varchar(5));
+
+Table created.
+
+SQL> insert into emp values('1','abc','10000','cse');
+
+1 row created.
+
+SQL> insert into emp (salary,id,dept,name)values('80000','2','eee','xyz');
+
+1 row created.
+
+SQL> insert into emp (salary,id,dept,name)values('8000','3','eee','xz');
+
+1 row created.
+
+SQL> insert into emp values('4','abcd','100000','cse');
+
+1 row created.
+
+SQL> insert into emp values('&id','&name');
+Enter value for id: 5
+Enter value for name: gfg
+old   1: insert into emp values('&id','&name')
+new   1: insert into emp values('5','gfg')
+insert into emp values('5','gfg')
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> select * from emp;
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+
+SQL> /
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+
+SQL> insert into emp values('&id','&name','&dept','&salary');
+Enter value for id: 6
+Enter value for name: red
+Enter value for dept: mech
+Enter value for salary: 23563
+old   1: insert into emp values('&id','&name','&dept','&salary')
+new   1: insert into emp values('6','red','mech','23563')
+insert into emp values('6','red','mech','23563')
+                                 *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+SQL> /
+Enter value for id: 5
+Enter value for name: re
+Enter value for dept: mech
+Enter value for salary: 4442
+old   1: insert into emp values('&id','&name','&dept','&salary')
+new   1: insert into emp values('5','re','mech','4442')
+insert into emp values('5','re','mech','4442')
+                                *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+SQL> alter table emp modify salary char[10];
+alter table emp modify salary char[10]
+                                  *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> 
+SQL> insert into emp values('&id','&name','&salary','&dept');
+Enter value for id: 5
+Enter value for name: d
+Enter value for salary: 3
+Enter value for dept: 56
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('5','d','3','56')
+
+1 row created.
+
+SQL> /
+Enter value for id: 7
+Enter value for name: fs
+Enter value for salary: 4463
+Enter value for dept: cse
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('7','fs','4463','cse')
+
+1 row created.
+
+SQL> /
+Enter value for id: 9
+Enter value for name: ers
+Enter value for salary: 13546
+Enter value for dept: it
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('9','ers','13546','it')
+
+1 row created.
+
+SQL> 
+SQL> /
+Enter value for id: 10
+Enter value for name: dcx
+Enter value for salary: 53687
+Enter value for dept: mech
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('10','dcx','53687','mech')
+
+1 row created.
+
+SQL> /
+Enter value for id: 11
+Enter value for name: dfw
+Enter value for salary: 66756
+Enter value for dept: eee
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('11','dfw','66756','eee')
+
+1 row created.
+
+SQL> /
+Enter value for id: 12
+Enter value for name: eaf
+Enter value for salary: 67784
+Enter value for dept: ece
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('12','eaf','67784','ece')
+
+1 row created.
+
+SQL> select * from emp;
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+5     d                   3 56
+7     fs               4463 cse
+9     ers             13546 it
+10    dcx             53687 mech
+11    dfw             66756 eee
+12    eaf             67784 ece
+
+10 rows selected.
+
+SQL> delete from emp where(name='d');
+
+1 row deleted.
+
+SQL> select * from emp;
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+7     fs               4463 cse
+9     ers             13546 it
+10    dcx             53687 mech
+11    dfw             66756 eee
+12    eaf             67784 ece
+
+9 rows selected.
+
+SQL> insert into emp values('&id','&name','&salary','&dept');
+Enter value for id: 5
+Enter value for name: ghj
+Enter value for salary: 74523
+Enter value for dept: it
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('5','ghj','74523','it')
+
+1 row created.
+
+SQL> /
+Enter value for id: 6
+Enter value for name: ged
+Enter value for salary: 7425
+Enter value for dept: mech
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('6','ged','7425','mech')
+
+1 row created.
+
+SQL> /
+Enter value for id: 8
+Enter value for name: df
+Enter value for salary: 6746
+Enter value for dept: ece
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('8','df','6746','ece')
+
+1 row created.
+
+SQL> /
+Enter value for id: 13
+Enter value for name: eef
+Enter value for salary: 56735
+Enter value for dept: it
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('13','eef','56735','it')
+
+1 row created.
+
+SQL> /
+Enter value for id: 14
+Enter value for name: mdi
+Enter value for salary: 9835
+Enter value for dept: mech
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('14','mdi','9835','mech')
+
+1 row created.
+
+SQL> select *from emp;
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+7     fs               4463 cse
+9     ers             13546 it
+10    dcx             53687 mech
+11    dfw             66756 eee
+12    eaf             67784 ece
+5     ghj             74523 it
+6     ged              7425 mech
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+8     df               6746 ece
+13    eef             56735 it
+14    mdi              9835 mech
+
+14 rows selected.
+
+SQL> SQL> create table emp(id char(5),name varchar(10),salary number,dept varchar(5));
+
+Table created.
+
+SQL> insert into emp values('1','abc','10000','cse');
+
+1 row created.
+
+SQL> insert into emp (salary,id,dept,name)values('80000','2','eee','xyz');
+
+1 row created.
+
+SQL> insert into emp (salary,id,dept,name)values('8000','3','eee','xz');
+
+1 row created.
+
+SQL> insert into emp values('4','abcd','100000','cse');
+
+1 row created.
+
+SQL> insert into emp values('&id','&name');
+Enter value for id: 5
+Enter value for name: gfg
+old   1: insert into emp values('&id','&name')
+new   1: insert into emp values('5','gfg')
+insert into emp values('5','gfg')
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> select * from emp;
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+
+SQL> /
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+
+SQL> insert into emp values('&id','&name','&dept','&salary');
+Enter value for id: 6
+Enter value for name: red
+Enter value for dept: mech
+Enter value for salary: 23563
+old   1: insert into emp values('&id','&name','&dept','&salary')
+new   1: insert into emp values('6','red','mech','23563')
+insert into emp values('6','red','mech','23563')
+                                 *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+SQL> /
+Enter value for id: 5
+Enter value for name: re
+Enter value for dept: mech
+Enter value for salary: 4442
+old   1: insert into emp values('&id','&name','&dept','&salary')
+new   1: insert into emp values('5','re','mech','4442')
+insert into emp values('5','re','mech','4442')
+                                *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+SQL> alter table emp modify salary char[10];
+alter table emp modify salary char[10]
+                                  *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> 
+SQL> insert into emp values('&id','&name','&salary','&dept');
+Enter value for id: 5
+Enter value for name: d
+Enter value for salary: 3
+Enter value for dept: 56
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('5','d','3','56')
+
+1 row created.
+
+SQL> /
+Enter value for id: 7
+Enter value for name: fs
+Enter value for salary: 4463
+Enter value for dept: cse
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('7','fs','4463','cse')
+
+1 row created.
+
+SQL> /
+Enter value for id: 9
+Enter value for name: ers
+Enter value for salary: 13546
+Enter value for dept: it
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('9','ers','13546','it')
+
+1 row created.
+
+SQL> 
+SQL> /
+Enter value for id: 10
+Enter value for name: dcx
+Enter value for salary: 53687
+Enter value for dept: mech
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('10','dcx','53687','mech')
+
+1 row created.
+
+SQL> /
+Enter value for id: 11
+Enter value for name: dfw
+Enter value for salary: 66756
+Enter value for dept: eee
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('11','dfw','66756','eee')
+
+1 row created.
+
+SQL> /
+Enter value for id: 12
+Enter value for name: eaf
+Enter value for salary: 67784
+Enter value for dept: ece
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('12','eaf','67784','ece')
+
+1 row created.
+
+SQL> select * from emp;
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+5     d                   3 56
+7     fs               4463 cse
+9     ers             13546 it
+10    dcx             53687 mech
+11    dfw             66756 eee
+12    eaf             67784 ece
+
+10 rows selected.
+
+SQL> delete from emp where(name='d');
+
+1 row deleted.
+
+SQL> select * from emp;
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+7     fs               4463 cse
+9     ers             13546 it
+10    dcx             53687 mech
+11    dfw             66756 eee
+12    eaf             67784 ece
+
+9 rows selected.
+
+SQL> insert into emp values('&id','&name','&salary','&dept');
+Enter value for id: 5
+Enter value for name: ghj
+Enter value for salary: 74523
+Enter value for dept: it
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('5','ghj','74523','it')
+
+1 row created.
+
+SQL> /
+Enter value for id: 6
+Enter value for name: ged
+Enter value for salary: 7425
+Enter value for dept: mech
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('6','ged','7425','mech')
+
+1 row created.
+
+SQL> /
+Enter value for id: 8
+Enter value for name: df
+Enter value for salary: 6746
+Enter value for dept: ece
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('8','df','6746','ece')
+
+1 row created.
+
+SQL> /
+Enter value for id: 13
+Enter value for name: eef
+Enter value for salary: 56735
+Enter value for dept: it
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('13','eef','56735','it')
+
+1 row created.
+
+SQL> /
+Enter value for id: 14
+Enter value for name: mdi
+Enter value for salary: 9835
+Enter value for dept: mech
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('14','mdi','9835','mech')
+
+1 row created.
+
+SQL> select *from emp;
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+7     fs               4463 cse
+9     ers             13546 it
+10    dcx             53687 mech
+11    dfw             66756 eee
+12    eaf             67784 ece
+5     ghj             74523 it
+6     ged              7425 mech
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+8     df               6746 ece
+13    eef             56735 it
+14    mdi              9835 mech
+
+14 rows selected.
+
+SQL> SQL> create table emp(id char(5),name varchar(10),salary number,dept varchar(5));
+
+Table created.
+
+SQL> insert into emp values('1','abc','10000','cse');
+
+1 row created.
+
+SQL> insert into emp (salary,id,dept,name)values('80000','2','eee','xyz');
+
+1 row created.
+
+SQL> insert into emp (salary,id,dept,name)values('8000','3','eee','xz');
+
+1 row created.
+
+SQL> insert into emp values('4','abcd','100000','cse');
+
+1 row created.
+
+SQL> insert into emp values('&id','&name');
+Enter value for id: 5
+Enter value for name: gfg
+old   1: insert into emp values('&id','&name')
+new   1: insert into emp values('5','gfg')
+insert into emp values('5','gfg')
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> select * from emp;
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+
+SQL> /
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+
+SQL> insert into emp values('&id','&name','&dept','&salary');
+Enter value for id: 6
+Enter value for name: red
+Enter value for dept: mech
+Enter value for salary: 23563
+old   1: insert into emp values('&id','&name','&dept','&salary')
+new   1: insert into emp values('6','red','mech','23563')
+insert into emp values('6','red','mech','23563')
+                                 *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+SQL> /
+Enter value for id: 5
+Enter value for name: re
+Enter value for dept: mech
+Enter value for salary: 4442
+old   1: insert into emp values('&id','&name','&dept','&salary')
+new   1: insert into emp values('5','re','mech','4442')
+insert into emp values('5','re','mech','4442')
+                                *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+SQL> alter table emp modify salary char[10];
+alter table emp modify salary char[10]
+                                  *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> 
+SQL> insert into emp values('&id','&name','&salary','&dept');
+Enter value for id: 5
+Enter value for name: d
+Enter value for salary: 3
+Enter value for dept: 56
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('5','d','3','56')
+
+1 row created.
+
+SQL> /
+Enter value for id: 7
+Enter value for name: fs
+Enter value for salary: 4463
+Enter value for dept: cse
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('7','fs','4463','cse')
+
+1 row created.
+
+SQL> /
+Enter value for id: 9
+Enter value for name: ers
+Enter value for salary: 13546
+Enter value for dept: it
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('9','ers','13546','it')
+
+1 row created.
+
+SQL> 
+SQL> /
+Enter value for id: 10
+Enter value for name: dcx
+Enter value for salary: 53687
+Enter value for dept: mech
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('10','dcx','53687','mech')
+
+1 row created.
+
+SQL> /
+Enter value for id: 11
+Enter value for name: dfw
+Enter value for salary: 66756
+Enter value for dept: eee
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('11','dfw','66756','eee')
+
+1 row created.
+
+SQL> /
+Enter value for id: 12
+Enter value for name: eaf
+Enter value for salary: 67784
+Enter value for dept: ece
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('12','eaf','67784','ece')
+
+1 row created.
+
+SQL> select * from emp;
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+5     d                   3 56
+7     fs               4463 cse
+9     ers             13546 it
+10    dcx             53687 mech
+11    dfw             66756 eee
+12    eaf             67784 ece
+
+10 rows selected.
+
+SQL> delete from emp where(name='d');
+
+1 row deleted.
+
+SQL> select * from emp;
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+7     fs               4463 cse
+9     ers             13546 it
+10    dcx             53687 mech
+11    dfw             66756 eee
+12    eaf             67784 ece
+
+9 rows selected.
+
+SQL> insert into emp values('&id','&name','&salary','&dept');
+Enter value for id: 5
+Enter value for name: ghj
+Enter value for salary: 74523
+Enter value for dept: it
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('5','ghj','74523','it')
+
+1 row created.
+
+SQL> /
+Enter value for id: 6
+Enter value for name: ged
+Enter value for salary: 7425
+Enter value for dept: mech
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('6','ged','7425','mech')
+
+1 row created.
+
+SQL> /
+Enter value for id: 8
+Enter value for name: df
+Enter value for salary: 6746
+Enter value for dept: ece
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('8','df','6746','ece')
+
+1 row created.
+
+SQL> /
+Enter value for id: 13
+Enter value for name: eef
+Enter value for salary: 56735
+Enter value for dept: it
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('13','eef','56735','it')
+
+1 row created.
+
+SQL> /
+Enter value for id: 14
+Enter value for name: mdi
+Enter value for salary: 9835
+Enter value for dept: mech
+old   1: insert into emp values('&id','&name','&salary','&dept')
+new   1: insert into emp values('14','mdi','9835','mech')
+
+1 row created.
+
+
+SQL> select * from emp;
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+5     ghj             74523 it
+6     ged              7425 mech
+7     fs               4463 cse
+8     df               6746 ece
+9     fgf             65664 eee
+10    fdf             63454 it
+11    grf              3212 mech
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+12    ews              5896 mech
+
+12 rows selected.
+SQL> select name,salary from emp;
+
+NAME           SALARY
+---------- ----------
+abc             10000
+xyz             80000
+xz               8000
+abcd           100000
+ghj             74523
+ged              7425
+fs               4463
+df               6746
+fgf             65664
+fdf              5335
+grf              3212
+
+NAME           SALARY
+---------- ----------
+ews              5896
+
+12 rows selected.
+
+SQL> select distinct dept from emp;
+
+DEPT
+-----
+cse
+eee
+it
+ece
+mech
+
+SQL> select name from emp where salary between 3732 and 93535;
+
+NAME
+----------
+abc
+xyz
+xz
+ghj
+ged
+fs
+df
+fgf
+fdf
+ews
+
+10 rows selected.
+
+
+SQL> where dept in('cse','it');
+SP2-0734: unknown command beginning "where dept..." - rest of line ignored.
+SQL> select name from emp where dept in('cse','it');
+
+NAME
+----------
+abc
+abcd
+ghj
+fs
+fdf
+
+SQL> select name from emp where name like '%f';
+
+NAME
+----------
+df
+fgf
+fdf
+grf
+
+SQL> select name from emp where name like 's%';
+
+no rows selected
+
+SQL> select dept, avg(salary)from emp group by dept;
+
+DEPT  AVG(SALARY)
+----- -----------
+cse    38154.3333
+eee    51221.3333
+it          39929
+ece          6746
+mech         5511
+
+SQL> select dept, avg(salary)from emp group by dept having (dept='it');
+
+DEPT  AVG(SALARY)
+----- -----------
+it          39929
+
+
+SQL> select sum (salary) from emp;
+
+SUM(SALARY)
+-----------
+     371264
+
+SQL> select * from emp order by name desc;
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+3     xz               8000 eee
+2     xyz             80000 eee
+11    grf              3212 mech
+5     ghj             74523 it
+6     ged              7425 mech
+7     fs               4463 cse
+9     fgf             65664 eee
+10    fdf              5335 it
+12    ews              5896 mech
+8     df               6746 ece
+4     abcd           100000 cse
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+
+12 rows selected.
+
+
+SQL> commit;
+
+Commit complete.
+
+

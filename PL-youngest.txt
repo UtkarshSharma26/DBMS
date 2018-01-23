@@ -1,0 +1,31 @@
+Retirement Age
+---------------------------------------------------------
+
+SQL> set serveroutput on;
+SQL>  declare
+  2       new_bday         date;
+  3         nm               curex.name%type;
+  4       eid              curex.id%type;
+  5       ra               date;
+  6  cursor find_new_bday is select max(dob)from curex;
+  7    cursor emp_det is select name,id from curex where dob=new_bday;
+  8  
+  9    begin
+ 10       if not find_new_bday%isopen then
+ 11              open find_new_bday;
+ 12         end if;
+ 13         fetch find_new_bday into new_bday;
+ 14        close find_new_bday;
+ 15    open emp_det;
+ 16       fetch emp_det into nm,eid;
+ 17       close emp_det;
+ 18       dbms_output.put_line('The youngest employee is ' || nm ||',' || 
+ 19  
+ 20    ra:=add_months(new_bday,60*12);
+ 21    dbms_output.put_line('Retirement date is' || ra);
+ 22  end;
+ 23    /
+The youngest employee is dharmendra,305
+Retirement date is14-AUG-48
+
+PL/SQL procedure successfully completed.

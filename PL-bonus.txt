@@ -1,0 +1,41 @@
+Employee Bonus
+-------------------------------------------------------------------------
+SQL>  set serveroutput on;
+SQL> declare
+  2       cursor a is select name,dob,sal from curex for update;
+  3        a_var a%rowtype;
+  4       begin
+  5          if not a%isopen then
+  6              open a;
+  7          end if;
+  8      dbms_output.put_line('hai');
+  9      fetch a into a_var;
+ 10       while a%found 
+ 11     loop
+ 12        update curex set sal=sal+1000 where current of a;
+ 13        fetch a into a_var;
+ 14     end loop;
+ 15    close a;
+ 16     dbms_output.put_line('Emp details are');
+ 17     commit;
+ 18     open a;
+ 19       fetch a into a_var;
+ 20       while a%found 
+ 21     loop
+ 22        dbms_output.put_line(a_var.name|| a_var.dob || a_var.sal);
+ 23         fetch a into a_var;
+ 24     end loop;
+ 25     close a;
+ 26     end;
+ 27     /
+hai
+Emp details are
+ramesh12-OCT-7828000
+ramu14-JAN-8037000
+rajesh25-MAR-6753000
+vicky12-JAN-7743000
+dharmendra14-AUG-8837000
+
+PL/SQL procedure successfully completed.
+
+SQL> 

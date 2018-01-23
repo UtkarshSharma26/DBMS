@@ -1,0 +1,11 @@
+SQL> set serveroutput on
+SQL> declare
+  2  nm varchar2(20);
+  3  begin
+  4  nm:=find_senior;
+  5  dbms_output.put_line('the senior employee is'||nm);
+  6  end;
+  7  /
+the senior employee israjesh
+
+PL/SQL procedure successfully completed.

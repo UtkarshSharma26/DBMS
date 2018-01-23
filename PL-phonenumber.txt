@@ -1,0 +1,39 @@
+SQL> create table phno(name varchar2(10), ph number);
+
+Table created.
+
+SQL> create or replace trigger tg2 before insert on phno
+  2  for each row
+  3  begin
+  4  if (:new.ph is null) then
+  5  :new.ph:='NULL';
+  6  end if;
+  7  end;
+  8  /
+
+Trigger created.
+
+SQL> insert into phno values('&name','&ph');
+Enter value for name: rahul
+Enter value for ph: 45352535
+old   1: insert into phno values('&name','&ph')
+new   1: insert into phno values('rahul','45352535')
+
+1 row created.
+
+SQL> /
+Enter value for name: rakesh
+Enter value for ph: 567467435
+old   1: insert into phno values('&name','&ph')
+new   1: insert into phno values('rakesh','567467435')
+
+1 row created.
+ 
+SQL> select * from phno;
+
+NAME               PH
+---------- ----------
+ram            123456
+rahul      3.5657E+10
+rahul        45352535
+rakesh      567467435

@@ -1,0 +1,56 @@
+
+SQL> create or replace procedure find_emp 
+  2           ( x in date,y in date) is
+  3     
+  4         cursor c is select name,dob from  curex;
+  5         c_var c%rowtype;
+  6       
+  7      
+  8     begin
+  9    
+ 10         open c;
+ 11          fetch c into c_var;
+ 12          while c%found
+ 13            loop
+ 14               if  c_var.dob>=x and c_var.dob<=y then
+ 15                   dbms_output.put_line(c_var.name);
+ 16                end if;
+ 17             fetch c into c_var;
+ 18            end loop;
+ 19     close c;
+ 20     
+ 21     end find_emp;
+ 22     /
+
+Procedure created.
+
+SQL> set serveroutput on
+SQL>  declare
+  2      
+  3       a date;
+  4       b date;
+  5      
+  6      begin
+  7       
+  8        select   '&a' into a from dual;
+  9      
+ 10     
+ 11      
+ 12     select    '&b' into b from dual;
+ 13     
+ 14     
+ 15        find_emp(a,b);
+ 16     end;
+ 17    /
+Enter value for a: 1-jan-80
+old   8:       select   '&a' into a from dual;
+new   8:       select   '1-jan-80' into a from dual;
+Enter value for b: 2-jan-90
+old  12:    select    '&b' into b from dual;
+new  12:    select    '2-jan-90' into b from dual;
+ramu
+dharmendra
+
+PL/SQL procedure successfully completed.
+
+SQL> 

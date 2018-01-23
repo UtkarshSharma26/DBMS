@@ -1,0 +1,360 @@
+insert into emp values (&emp_id , 
+SQL*Plus: Release 10.2.0.1.0 - Production on Wed Aug 30 08:14:29 2017
+
+Copyright (c) 1982, 2005, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 10g Enterprise Edition Release 10.2.0.1.0 - Production
+With the Partitioning, OLAP and Data Mining options
+
+SQL> desc
+Usage: DESCRIBE [schema.]object[@db_link]
+SQL> select* from emp;
+
+no rows selected
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                                 CHAR(5)
+ NAME                                               VARCHAR2(10)
+ SALARY                                             NUMBER
+ DEPT                                               VARCHAR2(5)
+
+SQL> alter table emp ( add "dept_id" int);
+alter table emp ( add "dept_id" int)
+                *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> alter table emp add 'dept_id' int;
+alter table emp add 'dept_id' int
+                    *
+ERROR at line 1:
+ORA-00904: : invalid identifier
+
+
+SQL> select * from emp;
+
+no rows selected
+
+SQL> drop table emp;
+
+Table dropped.
+
+SQL> desc emp;
+ERROR:
+ORA-04043: object emp does not exist
+
+
+SQL> create table emp (emp_id varchar2 , emp_name varchar2(10) , city varchar2(10) , salary number(1
+0) , dept_id int , dept_name varchar2(10));
+create table emp (emp_id varchar2 , emp_name varchar2(10) , city varchar2(10) , salary number(10) , 
+                                  *
+ERROR at line 1:
+ORA-00906: missing left parenthesis
+
+
+SQL>  create table emp (emp_id number , emp_name varchar2(10) , city varchar2(10) , salary number(1
+  2   dept_id int , dept_name varchar2(10));
+ dept_id int , dept_name varchar2(10))
+ *
+ERROR at line 2:
+ORA-00907: missing right parenthesis
+
+
+SQL>  create table emp (emp_id number , emp_name varchar2(10) , city varchar2(10) , salary number(7)
+ , dept_id int , dept_name varchar2(10));
+
+Table created.
+
+SQL> insert into emp (emp_id , 'emp_name' , 'city' , salary , dept_id , 'dept_name');
+insert into emp (emp_id , 'emp_name' , 'city' , salary , dept_id , 'dept_name')
+                          *
+ERROR at line 1:
+ORA-01747: invalid user.table.column, table.column, or column specification
+
+
+SQL> insert into emp (emp_id , "emp_name" , "city" , salary , dept_id , "dept_name");
+insert into emp (emp_id , "emp_name" , "city" , salary , dept_id , "dept_name")
+                                                                              *
+ERROR at line 1:
+ORA-00926: missing VALUES keyword
+
+
+SQL> insert into emp values (&emp_id , '&emp_name' , '&city' , &salary , &dept_id , 'dept_name');
+Enter value for emp_id: 1
+Enter value for emp_name: babu
+Enter value for city: chennai
+Enter value for salary: 123456
+Enter value for dept_id: 111
+old   1: insert into emp values (&emp_id , '&emp_name' , '&city' , &salary , &dept_id , 'dept_name')
+new   1: insert into emp values (1 , 'babu' , 'chennai' , 123456 , 111 , 'dept_name')
+
+1 row created.
+
+SQL> delete from emp where emp_id=1;
+
+1 row deleted.
+
+SQL> insert into emp values (&emp_id , '&emp_name' , '&city' , &salary , &dept_id , '&dept_name');
+Enter value for emp_id: 1
+Enter value for emp_name: babu
+Enter value for city: chennai
+Enter value for salary: 543210
+Enter value for dept_id: 111
+Enter value for dept_name: cse
+old   1: insert into emp values (&emp_id , '&emp_name' , '&city' , &salary , &dept_id , '&dept_name'
+new   1: insert into emp values (1 , 'babu' , 'chennai' , 543210 , 111 , 'cse')
+
+1 row created.
+
+SQL> /
+Enter value for emp_id: 2
+Enter value for emp_name: rajesh
+Enter value for city: banglore
+Enter value for salary: 3566356
+Enter value for dept_id: 222
+Enter value for dept_name: swe
+old   1: insert into emp values (&emp_id , '&emp_name' , '&city' , &salary , &dept_id , '&dept_name'
+new   1: insert into emp values (2 , 'rajesh' , 'banglore' , 3566356 , 222 , 'swe')
+
+1 row created.
+
+SQL> /
+Enter value for emp_id: geeta
+Enter value for emp_name: 
+Enter value for city: 
+Enter value for salary: 
+Enter value for dept_id: 
+Enter value for dept_name: /
+old   1: insert into emp values (&emp_id , '&emp_name' , '&city' , &salary , &dept_id , '&dept_name'
+new   1: insert into emp values (geeta , '' , '' ,  ,  , '/')
+insert into emp values (geeta , '' , '' ,  ,  , '/')
+                                           *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> /
+Enter value for emp_id: 3
+Enter value for emp_name: geeta
+Enter value for city: hyd
+Enter value for salary: 5634655
+Enter value for dept_id: 111
+Enter value for dept_name: cse
+old   1: insert into emp values (&emp_id , '&emp_name' , '&city' , &salary , &dept_id , '&dept_name'
+new   1: insert into emp values (3 , 'geeta' , 'hyd' , 5634655 , 111 , 'cse')
+
+1 row created.
+
+SQL> /
+Enter value for emp_id: asha
+Enter value for emp_name: /
+Enter value for city: /
+Enter value for salary: //
+Enter value for dept_id: /
+Enter value for dept_name: //
+old   1: insert into emp values (&emp_id , '&emp_name' , '&city' , &salary , &dept_id , '&dept_name'
+new   1: insert into emp values (asha , '/' , '/' , // , / , '//')
+insert into emp values (asha , '/' , '/' , // , / , '//')
+                                           *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> /
+Enter value for emp_id: 4
+Enter value for emp_name: asha
+Enter value for city: chennai
+Enter value for salary: 535346
+Enter value for dept_id: 333
+Enter value for dept_name: mech
+old   1: insert into emp values (&emp_id , '&emp_name' , '&city' , &salary , &dept_id , '&dept_name'
+new   1: insert into emp values (4 , 'asha' , 'chennai' , 535346 , 333 , 'mech')
+
+1 row created.
+
+SQL> /
+Enter value for emp_id: 5
+Enter value for emp_name: ashwin
+Enter value for city: chennai
+Enter value for salary: 246342
+Enter value for dept_id: 111
+Enter value for dept_name: cse
+old   1: insert into emp values (&emp_id , '&emp_name' , '&city' , &salary , &dept_id , '&dept_name'
+new   1: insert into emp values (5 , 'ashwin' , 'chennai' , 246342 , 111 , 'cse')
+
+1 row created.
+
+SQL> commit
+  2  comit;
+comit
+*
+ERROR at line 2:
+ORA-02185: a token other than WORK follows COMMIT
+SQL> commit;
+'&emp_name' , '&city' , &salary , &dept_id , '&dept_name');
+SQL> select * from emp where city='chennai' OR city='hyd' OR city='banglore';
+
+    EMP_ID EMP_NAME   CITY           SALARY    DEPT_ID DEPT_NAME
+---------- ---------- ---------- ---------- ---------- ----------
+         1 babu       chennai        543210        111 cse
+         2 rajesh     banglore      3566356        222 swe
+         3 geeta      hyd           5634655        111 cse
+         4 asha       chennai        535346        333 mech
+         5 ashwin     chennai        246342        111 cse
+SQL> select emp_name from emp where salary>(select salary from emp where emp_name='rajesh');
+
+EMP_NAME
+----------
+geeta
+
+SQL> select emp_name from emp where city !=(select city from emp where emp_name='geeta');
+
+EMP_NAME
+----------
+babu
+rajesh
+asha
+ashwin
+
+SQL> select emp_name from emp where dept_id = (select dept_id from emp where emp_name='geeta')
+
+
+EMP_NAME
+----------
+babu
+geeta
+ashwin
+
+SQL> insert into emp values (&emp_id , '&emp_name' , '&city' , &salary , &dept_id , '&dept_name');
+Enter value for emp_id: 5
+Enter value for emp_name: raj
+Enter value for city: banglore
+Enter value for salary: 3566356
+Enter value for dept_id: 222
+Enter value for dept_name: swe
+old   1: insert into emp values (&emp_id , '&emp_name' , '&city' , &salary , &dept_id , '&dept_name'
+new   1: insert into emp values (5 , 'raj' , 'banglore' , 3566356 , 222 , 'swe')
+
+1 row created.
+
+SQL> /
+Enter value for emp_id: 6
+Enter value for emp_name: karan
+Enter value for city: banglore
+Enter value for salary: 
+Enter value for dept_id: 3566356
+Enter value for dept_name: 222
+old   1: insert into emp values (&emp_id , '&emp_name' , '&city' , &salary , &dept_id , '&dept_name'
+new   1: insert into emp values (6 , 'karan' , 'banglore' ,  , 3566356 , '222')
+insert into emp values (6 , 'karan' , 'banglore' ,  , 3566356 , '222')
+                                                    *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> swe
+SP2-0042: unknown command "swe" - rest of line ignored.
+SQL> /
+Enter value for emp_id: 6
+Enter value for emp_name: atin
+Enter value for city: banglore
+Enter value for salary: 3566356
+Enter value for dept_id: 222
+Enter value for dept_name: swe
+old   1: insert into emp values (&emp_id , '&emp_name' , '&city' , &salary , &dept_id , '&dept_name'
+new   1: insert into emp values (6 , 'atin' , 'banglore' , 3566356 , 222 , 'swe')
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> update emp set(emp_id=7 where emp_name='raj');
+update emp set(emp_id=7 where emp_name='raj')
+                     *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> update emp set(emp_id='7' where emp_name='raj');
+update emp set(emp_id='7' where emp_name='raj')
+                     *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> update emp set emp_id=7 where emp_name='raj';
+
+1 row updated.
+
+SQL> select*from emp;
+
+    EMP_ID EMP_NAME   CITY           SALARY    DEPT_ID DEPT_NAME
+---------- ---------- ---------- ---------- ---------- ----------
+         7 raj        banglore      3566356        222 swe
+         6 atin       banglore      3566356        222 swe
+         1 babu       chennai        543210        111 cse
+         2 rajesh     banglore      3566356        222 swe
+         3 geeta      hyd           5634655        111 cse
+         4 asha       chennai        535346        333 mech
+         5 ashwin     chennai        246342        111 cse
+
+7 rows selected.
+
+SQL> commit;c
+
+Commit complete.
+
+SQL> select emp_name,salary from emp where dept_id=222 and salary > (select max(salary) from emp whe
+re dept_id=111);
+
+no rows selected
+
+SQL> select emp_name,salary from emp where dept_id=111 and salary > (select max(salary) from emp whe
+re dept_id=222);
+
+EMP_NAME       SALARY
+---------- ----------
+geeta         5634655
+
+SQL> select emp_name, salary from emp where( salary=(select salary from emp where emp_name='rajesh')
+and dept_id=(select dept_id from emp where emp_name='rajesh'));
+
+EMP_NAME       SALARY
+---------- ----------
+raj           3566356
+atin          3566356
+rajesh        3566356
+
+
+SQL>  select emp_name from emp where salary=(select min(salary) from emp);
+
+EMP_NAME
+----------
+ashwin
+
+SQL> select emp_name from emp where salary> (select avg(salary) from emp where dept_name='cse');
+
+EMP_NAME
+----------
+raj
+atin
+rajesh
+geeta
+
+SQL> select dept_name from emp group by dept_name having avg(salary) in (select min(avg(salary)) fro
+m emp
+  2  group by dept_name);
+
+DEPT_NAME
+----------
+mech
+
+SQL> 
+

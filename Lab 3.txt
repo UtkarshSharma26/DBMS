@@ -1,0 +1,230 @@
+SQL> select * from emp;
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+5     ghj             74523 it
+6     ged              7425 mech
+7     fs               4463 cse
+8     df               6746 ece
+9     fgf             65664 eee
+10    fdf              5335 it
+11    grf              3212 mech
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+12    ews              5896 mech
+
+12 rows selected.
+
+SQL> create view v1 as select * from emp;
+
+View created.
+
+SQL> select * from v1;
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             10000 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           100000 cse
+5     ghj             74523 it
+6     ged              7425 mech
+7     fs               4463 cse
+8     df               6746 ece
+9     fgf             65664 eee
+10    fdf              5335 it
+11    grf              3212 mech
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+12    ews              5896 mech
+
+12 rows selected.
+
+SQL> create view v2 as select name , dept from emp;
+
+View created.
+
+
+SQL> select * from v2;
+
+NAME       DEPT
+---------- -----
+abc        cse
+xyz        eee
+xz         eee
+abcd       cse
+ghj        it
+ged        mech
+fs         cse
+df         ece
+fgf        eee
+fdf        it
+grf        mech
+
+NAME       DEPT
+---------- -----
+ews        mech
+
+12 rows selected.
+
+SQL> insert into v1 values(&id,'&dept','&salary','&name');
+Enter value for id: 13
+Enter value for dept: mech
+Enter value for salary: 78752
+Enter value for name: pqr
+old   1: insert into v1 values(&id,'&dept','&salary','&name')
+new   1: insert into v1 values(13,'mech','78752','pqr')
+
+1 row created.
+
+SQL> /
+Enter value for id: 14
+Enter value for dept: cse
+Enter value for salary: 34623
+Enter value for name: epu
+old   1: insert into v1 values(&id,'&dept','&salary','&name')
+new   1: insert into v1 values(14,'cse','34623','epu')
+
+1 row created.
+
+SQL> /
+Enter value for id: 15
+Enter value for dept: ece
+Enter value for salary: 25573
+Enter value for name: utd
+old   1: insert into v1 values(&id,'&dept','&salary','&name')
+new   1: insert into v1 values(15,'ece','25573','utd')
+
+1 row created.
+
+SQL> /
+Enter value for id: 16
+Enter value for dept: eee
+Enter value for salary: 897834
+Enter value for name: pkd
+old   1: insert into v1 values(&id,'&dept','&salary','&name')
+new   1: insert into v1 values(16,'eee','897834','pkd')
+
+1 row created.
+
+SQL> /
+Enter value for id: 12
+Enter value for dept: mech
+Enter value for salary: 35254
+Enter value for name: asd
+old   1: insert into v1 values(&id,'&dept','&salary','&name')
+new   1: insert into v1 values(12,'mech','35254','asd')
+
+1 row created.
+
+SQL> insert into v1 values(&id,'&dept','&salary','&name');
+Enter value for id: 13
+Enter value for dept: mech
+Enter value for salary: 78752
+Enter value for name: pqr
+old   1: insert into v1 values(&id,'&dept','&salary','&name')
+new   1: insert into v1 values(13,'mech','78752','pqr')
+
+1 row created.
+
+SQL> /
+Enter value for id: 14
+Enter value for dept: cse
+Enter value for salary: 34623
+Enter value for name: epu
+old   1: insert into v1 values(&id,'&dept','&salary','&name')
+new   1: insert into v1 values(14,'cse','34623','epu')
+
+1 row created.
+
+SQL> /
+Enter value for id: 15
+Enter value for dept: ece
+Enter value for salary: 25573
+Enter value for name: utd
+old   1: insert into v1 values(&id,'&dept','&salary','&name')
+new   1: insert into v1 values(15,'ece','25573','utd')
+
+1 row created.
+
+SQL> /
+Enter value for id: 16
+Enter value for dept: eee
+Enter value for salary: 897834
+Enter value for name: pkd
+old   1: insert into v1 values(&id,'&dept','&salary','&name')
+new   1: insert into v1 values(16,'eee','897834','pkd')
+
+1 row created.
+
+SQL> /
+Enter value for id: 12
+Enter value for dept: mech
+Enter value for salary: 35254
+Enter value for name: asd
+old   1: insert into v1 values(&id,'&dept','&salary','&name')
+new   1: insert into v1 values(12,'mech','35254','asd')
+
+1 row created.
+
+
+SQL> update v1 set salary=salary+6767 where dept='cse';
+
+3 rows updated.
+
+SQL> select * from v1;
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+1     abc             16767 cse
+2     xyz             80000 eee
+3     xz               8000 eee
+4     abcd           106767 cse
+5     ghj             74523 it
+6     ged              7425 mech
+7     fs              11230 cse
+8     df               6746 ece
+9     fgf             65664 eee
+10    fdf              5335 it
+11    grf              3212 mech
+
+ID    NAME           SALARY DEPT
+----- ---------- ---------- -----
+12    ews              5896 mech
+
+12 rows selected.
+
+
+SQL> create view v4 as select * from emp;
+
+View created.
+
+SQL> create view v5 as select * from emp where salary >7768 with check option;
+
+View created.
+
+SQL> select * from v5;
+
+no rows selected
+
+
+SQL> drop view v4;
+
+View dropped.
+
+SQL> create view v6 as select name from stud with read only constraint my_view;
+
+View created.
+
+SQL> select * from v6;
+
+NAME
+----------
+abc
+

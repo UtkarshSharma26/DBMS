@@ -1,0 +1,158 @@
+
+SQL> create table stud(id char(5),name varchar(10));
+
+Table created.
+
+SQL> desc stud;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ---------------------
+ ID                                                 CHAR(5)
+ NAME                                               VARCHAR2(10)
+
+SQL> alter table stud add(Subjects varchar2(20),marks int);
+
+Table altered.
+
+SQL> desc stud;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ---------------------
+ ID                                                 CHAR(5)
+ NAME                                               VARCHAR2(10)
+ SUBJECTS                                           VARCHAR2(20)
+ MARKS                                              NUMBER(38)
+
+SQL> alter table stud add(age number,grade char);
+
+Table altered.
+
+SQL> desc stud;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ---------------------
+ ID                                                 CHAR(5)
+ NAME                                               VARCHAR2(10)
+ SUBJECTS                                           VARCHAR2(20)
+ MARKS                                              NUMBER(38)
+ AGE                                                NUMBER
+ GRADE                                              CHAR(1)
+
+SQL> alter table stud add(Mobile number,address varchar2(50));
+Table altered.
+
+SQL> desc stud;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ---------------------------
+ ID                                                 CHAR(5)
+ NAME                                               VARCHAR2(10)
+ SUBJECTS                                           VARCHAR2(20)
+ MARKS                                              NUMBER(38)
+ AGE                                                NUMBER
+ GRADE                                              CHAR(1)
+ MOBILE                                             NUMBER
+ ADDRESS                                            VARCHAR2(50)
+
+
+
+
+SQL> insert into stud(id,name)values(1,'abc');
+
+1 row created.
+
+SQL> desc stud;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                                 CHAR(5)
+ NAME                                               VARCHAR2(10)
+ SUBJECTS                                           VARCHAR2(20)
+ MARKS                                              NUMBER(38)
+ AGE                                                NUMBER
+ GRADE                                              CHAR(1)
+ MOBILE                                             NUMBER
+ ADDRESS                                            VARCHAR2(50)
+
+SQL> select * from stud;
+
+ID    NAME       SUBJECTS                  MARKS        AGE G     MOBILE
+----- ---------- -------------------- ---------- ---------- - ----------
+ADDRESS
+--------------------------------------------------
+1     abc
+
+
+
+
+
+SQL>  create table studp as(select id,name,age,mobile,address from stud);
+
+Table created.
+
+SQL> desc studp
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                                 CHAR(5)
+ NAME                                               VARCHAR2(10)
+ AGE                                                NUMBER
+ MOBILE                                             NUMBER
+ ADDRESS                                            VARCHAR2(50)
+
+
+
+SQL> select * from studp;
+
+ID    NAME              AGE     MOBILE
+----- ---------- ---------- ----------
+ADDRESS
+--------------------------------------------------
+1     abc
+
+
+
+SQL> alter table stud drop column grade;
+
+Table altered.
+
+SQL> desc stud;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                                 CHAR(5)
+ NAME                                               VARCHAR2(10)
+ SUBJECTS                                           VARCHAR2(20)
+ MARKS                                              NUMBER(38)
+ AGE                                                NUMBER
+ MOBILE                                             NUMBER
+ ADDRESS                                            VARCHAR2(50)
+
+SQL> 
+SQL> create view academics as (select subjects,marks,id,name,grade from stud);
+
+View created.
+
+SQL> desc academics;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ---------------------------
+ SUBJECTS                                           VARCHAR2(20)
+ MARKS                                              NUMBER(38)
+ ID                                                 CHAR(5)
+ NAME                                               VARCHAR2(10)
+ GRADE                                              CHAR(5)
+
+SQL> 
+SQL> alter table studp rename to personal;
+
+Table altered.
+
+SQL> desc studp;
+ERROR:
+ORA-04043: object studp does not exist
+
+
+SQL> desc personal;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                                 CHAR(5)
+ NAME                                               VARCHAR2(10)
+ AGE                                                NUMBER
+ MOBILE                                             NUMBER
+ ADDRESS                                            VARCHAR2(50)
+
+SQL> 
+

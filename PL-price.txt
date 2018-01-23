@@ -1,0 +1,17 @@
+Price of product
+-------------------
+SQL> set serveroutput on
+SQL> declare
+  2  price number;
+  3  begin
+  4  prod(&pid,&quantity,price);
+  5  dbms_output.put_line('price='||price);
+  6  end;
+  7  /
+Enter value for pid: 103
+Enter value for quantity: 50
+old   4: prod(&pid,&quantity,price);
+new   4: prod(103,50,price);
+price=500
+
+PL/SQL procedure successfully completed.

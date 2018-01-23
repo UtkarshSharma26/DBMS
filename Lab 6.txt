@@ -1,0 +1,267 @@
+SQL> create table people(ID int, Name varchar2(15), city varchar2(10));
+
+Table created.
+
+SQL> create table zip(city varchar2(10), PIN varchar(6));
+
+Table created.
+
+SQL> insert into person1 values(&ID, "&Name", "&city");
+Enter value for id: 1
+Enter value for name: rishabh
+Enter value for city: ranchi
+old   1: insert into person1 values(&ID, "&Name", "&city")
+new   1: insert into person1 values(1, "rishabh", "ranchi")
+insert into person1 values(1, "rishabh", "ranchi")
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> insert into people values(&ID, "&Name", "&city");
+Enter value for id: 1
+Enter value for name: rishabh
+Enter value for city: ranchi
+old   1: insert into people values(&ID, "&Name", "&city")
+new   1: insert into people values(1, "rishabh", "ranchi")
+insert into people values(1, "rishabh", "ranchi")
+                                        *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+SQL> insert into people values(&ID, "&Name", "&city");
+Enter value for id: 1
+Enter value for name: rishabh
+Enter value for city: rch
+old   1: insert into people values(&ID, "&Name", "&city")
+new   1: insert into people values(1, "rishabh", "rch")
+insert into people values(1, "rishabh", "rch")
+                                        *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+SQL> insert into people values(&ID, "&Name", '&city');
+Enter value for id: 1
+Enter value for name: rishabh
+Enter value for city: ranchi
+old   1: insert into people values(&ID, "&Name", '&city')
+new   1: insert into people values(1, "rishabh", 'ranchi')
+insert into people values(1, "rishabh", 'ranchi')
+                             *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+SQL> insert into people values(&ID, '&Name', '&city');
+Enter value for id: 1
+Enter value for name: rishabh
+Enter value for city: ranchi
+old   1: insert into people values(&ID, '&Name', '&city')
+new   1: insert into people values(1, 'rishabh', 'ranchi')
+
+1 row created.
+
+SQL> /
+Enter value for id: 2
+Enter value for name: mohit
+Enter value for city: lucknow
+old   1: insert into people values(&ID, '&Name', '&city')
+new   1: insert into people values(2, 'mohit', 'lucknow')
+
+1 row created.
+
+SQL> /
+Enter value for id: 3
+Enter value for name: saurav
+Enter value for city: mumbai
+old   1: insert into people values(&ID, '&Name', '&city')
+new   1: insert into people values(3, 'saurav', 'mumbai')
+
+1 row created.
+
+SQL> insert into zip values('&city', '&PIN);
+Enter value for city: mumbai
+Enter value for pin: 400001
+old   1: insert into zip values('&city', '&PIN)
+new   1: insert into zip values('mumbai', '400001)
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> insert into zip values('&city', '&PIN');
+Enter value for city: mumbai
+Enter value for pin: 400001
+old   1: insert into zip values('&city', '&PIN')
+new   1: insert into zip values('mumbai', '400001')
+
+1 row created.
+
+SQL> /
+Enter value for city: ranchi
+Enter value for pin: 600001
+old   1: insert into zip values('&city', '&PIN')
+new   1: insert into zip values('ranchi', '600001')
+
+1 row created.
+
+SQL> /
+Enter value for city: delhi
+Enter value for pin: 100001
+old   1: insert into zip values('&city', '&PIN')
+new   1: insert into zip values('delhi', '100001')
+
+1 row created.
+
+SQL> select * from people innerjoin zip on people city=zip.city;
+select * from people innerjoin zip on people city=zip.city
+                               *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from people innerjoin on people city=zip.city;
+select * from people innerjoin on people city=zip.city
+                               *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from people INNER JOIN zip on people.city = zip.city;
+
+        ID NAME            CITY       CITY       PIN
+---------- --------------- ---------- ---------- ------
+         3 saurav          mumbai     mumbai     400001
+         1 rishabh         ranchi     ranchi     600001
+
+SQL> select * from people LEFT JOIN zip on people.city = zip.city;
+
+        ID NAME            CITY       CITY       PIN
+---------- --------------- ---------- ---------- ------
+         3 saurav          mumbai     mumbai     400001
+         1 rishabh         ranchi     ranchi     600001
+         2 mohit           lucknow
+
+SQL> select * from people RIGHT JOIN zip on people.city = zip.city;
+
+        ID NAME            CITY       CITY       PIN
+---------- --------------- ---------- ---------- ------
+         1 rishabh         ranchi     ranchi     600001
+         3 saurav          mumbai     mumbai     400001
+                                      delhi      100001
+
+SQL> select * from people OOTER JOIN zip on people.city = zip.city;
+select * from people OOTER JOIN zip on people.city = zip.city
+                                       *
+ERROR at line 1:
+ORA-00904: "PEOPLE"."CITY": invalid identifier
+
+SQL> select * from people OUTER JOIN zip on people.city = zip.city;
+select * from people OUTER JOIN zip on people.city = zip.city
+                                       *
+ERROR at line 1:
+ORA-00904: "PEOPLE"."CITY": invalid identifier
+
+
+SQL> select * from people FULL OUTER JOIN zip on people.city = zip.city;
+
+        ID NAME            CITY       CITY       PIN
+---------- --------------- ---------- ---------- ------
+         3 saurav          mumbai     mumbai     400001
+         1 rishabh         ranchi     ranchi     600001
+         2 mohit           lucknow
+                                      delhi      100001
+
+SQL> select * from people NATURAL JOIN zip;
+
+CITY               ID NAME            PIN
+---------- ---------- --------------- ------
+mumbai              3 saurav          400001
+ranchi              1 rishabh         600001
+
+SQL> insert into people values(&ID, '&Name', '&city');
+Enter value for id: 4
+Enter value for name: shivam
+Enter value for city: mumbai
+old   1: insert into people values(&ID, '&Name', '&city')
+new   1: insert into people values(4, 'shivam', 'mumbai')
+
+1 row created.
+
+SQL> /
+Enter value for id: 5
+Enter value for name: akshay
+Enter value for city: delhi
+old   1: insert into people values(&ID, '&Name', '&city')
+new   1: insert into people values(5, 'akshay', 'delhi')
+
+1 row created.
+
+SQL> /
+Enter value for id: 6
+Enter value for name: ronit
+Enter value for city: jaipur
+old   1: insert into people values(&ID, '&Name', '&city')
+new   1: insert into people values(6, 'ronit', 'jaipur')
+
+1 row created.
+
+SQL> insert into zip values('&city','&PIN');
+Enter value for city: jaipur
+Enter value for pin: 300001
+old   1: insert into zip values('&city','&PIN')
+new   1: insert into zip values('jaipur','300001')
+
+1 row created.
+
+SQL> select people.Name, zip.PIN;
+select people.Name, zip.PIN
+                          *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select e.Name,d.city from people e,zip d;
+
+NAME            CITY
+--------------- ----------
+shivam          jaipur
+akshay          jaipur
+ronit           jaipur
+
+
+SQL> insert into zip values('&city', '&PIN');
+Enter value for city: mumbai
+Enter value for pin: 400001
+old   1: insert into zip values('&city', '&PIN')
+new   1: insert into zip values('mumbai', '400001')
+
+1 row created.
+
+SQL> /
+Enter value for city: ranchi
+Enter value for pin: 60001
+old   1: insert into zip values('&city', '&PIN')
+new   1: insert into zip values('ranchi', '60001')
+
+1 row created.
+
+SQL> /
+Enter value for city: delhi
+Enter value for pin: 100001
+old   1: insert into zip values('&city', '&PIN')
+new   1: insert into zip values('delhi', '100001')
+
+1 row created.
+
+SQL> select * from zip;
+
+CITY       PIN
+---------- ------
+jaipur     300001
+mumbai     400001
+ranchi     60001
+delhi      100001
+
+SQL> 
